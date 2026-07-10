@@ -1,0 +1,29 @@
+{
+  "name": "@page-extras/extension",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wxt",
+    "dev:firefox": "wxt -b firefox",
+    "build": "wxt build",
+    "build:firefox": "wxt build -b firefox",
+    "zip": "wxt zip",
+    "zip:firefox": "wxt zip -b firefox",
+    "postinstall": "wxt prepare"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "^5.1.1",
+    "lucide-react": "^1.16.0",
+    "react": "^19",
+    "react-dom": "^19"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.1.0",
+    "@types/node": "^24",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "typescript": "5.7.3",
+    "wxt": "^0.20.27"
+  }
+}

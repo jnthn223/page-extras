@@ -1,0 +1,84 @@
+:host {
+  color-scheme: light;
+  font-family:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+}
+
+.pageextras-shell {
+  position: fixed;
+  inset: auto 24px 24px auto;
+  z-index: 2147483647;
+  color: #16211f;
+}
+
+.pageextras-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 44px;
+  padding: 0 16px;
+  border: 1px solid rgba(22, 33, 31, 0.12);
+  border-radius: 999px;
+  background: #ffffff;
+  color: #16211f;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.18);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.pageextras-panel {
+  position: absolute;
+  right: 0;
+  bottom: 56px;
+  display: none;
+  width: min(360px, calc(100vw - 32px));
+  padding: 18px;
+  border: 1px solid rgba(22, 33, 31, 0.12);
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.18);
+}
+
+.pageextras-shell:focus-within .pageextras-panel,
+.pageextras-shell:hover .pageextras-panel {
+  display: grid;
+  gap: 16px;
+}
+
+.pageextras-kicker {
+  margin: 0 0 6px;
+  color: #158474;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.pageextras-panel h1 {
+  margin: 0 0 4px;
+  color: #16211f;
+  font-size: 16px;
+  line-height: 1.25;
+}
+
+.pageextras-panel p {
+  margin: 0;
+  color: #63706c;
+  font-size: 13px;
+}
+
+.pageextras-empty {
+  display: grid;
+  gap: 4px;
+  padding: 12px;
+  border-radius: 8px;
+  background: #f3f7f5;
+  color: #33413d;
+  font-size: 13px;
+}
+
+.pageextras-empty span {
+  color: #63706c;
+}
