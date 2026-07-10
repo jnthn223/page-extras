@@ -2,11 +2,13 @@ import { Send, X } from 'lucide-react'
 import { useMemo, useRef, useState } from 'react'
 import { DiscussionComment } from './DiscussionComment'
 import type { PageExtraComment, PageInfo } from './types'
+import type { AuthSession } from '../utils/auth'
 
 type DiscussionPanelProps = {
   isOpen: boolean
   page: PageInfo
   comments: PageExtraComment[]
+  session: AuthSession | null
   onClose: () => void
 }
 
@@ -16,6 +18,7 @@ export const DiscussionPanel = ({
   isOpen,
   page,
   comments,
+  session,
   onClose,
 }: DiscussionPanelProps) => {
   const [activeTab, setActiveTab] = useState<TabType>('top')
@@ -93,24 +96,38 @@ export const DiscussionPanel = ({
             <DiscussionComment
               key={comment.id}
               comment={comment}
+              canInteract={Boolean(session)}
               onReply={handleReply}
             />
           ))}
         </div>
 
         <footer className="pe-composer">
-          <label htmlFor="pageextras-demo-comment">Add an Extra</label>
+          <div className="pe-composer-header">
+            <label htmlFor="pageextras-demo-comment">Add an Extra</label>
+            {session ? (
+              <div className="pe-user-chip">
+                <span>{session.user.initials}</span>
+                {session.user.displayName}
+              </div>
+            ) : (
+              <div className="pe-user-chip pe-user-chip--muted">Signed out</div>
+            )}
+          </div>
           <textarea
             id="pageextras-demo-comment"
             ref={inputRef}
             rows={3}
             value={newCommentText}
-            placeholder="Share your thoughts..."
+            disabled={!session}
+            placeholder={
+              session ? 'Share your thoughts...' : 'Sign in from the popup to post.'
+            }
             onChange={(event) => setNewCommentText(event.target.value)}
           />
-          <button type="button" disabled={!newCommentText.trim()}>
+          <button type="button" disabled={!session || !newCommentText.trim()}>
             <Send size={15} />
-            Demo post
+            {session ? 'Demo post' : 'Sign in required'}
           </button>
         </footer>
       </aside>

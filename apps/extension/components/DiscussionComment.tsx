@@ -5,6 +5,7 @@ import type { PageExtraComment } from './types'
 type DiscussionCommentProps = {
   comment: PageExtraComment
   level?: number
+  canInteract: boolean
   onReply: (parentId: string) => void
 }
 
@@ -29,6 +30,7 @@ const getReputationBadge = (reputation: number) => {
 export const DiscussionComment = ({
   comment,
   level = 0,
+  canInteract,
   onReply,
 }: DiscussionCommentProps) => {
   const [userVote, setUserVote] = useState<'up' | 'down' | null>(null)
@@ -56,6 +58,7 @@ export const DiscussionComment = ({
             className="pe-icon-button"
             type="button"
             title="Report"
+            disabled={!canInteract}
             onClick={() => setShowReport((current) => !current)}
           >
             <Flag size={15} />
@@ -70,6 +73,7 @@ export const DiscussionComment = ({
               className={userVote === 'up' ? 'is-active' : ''}
               type="button"
               title="Upvote"
+              disabled={!canInteract}
               onClick={() => setUserVote((current) => (current === 'up' ? null : 'up'))}
             >
               <ThumbsUp size={13} />
@@ -79,6 +83,7 @@ export const DiscussionComment = ({
               className={userVote === 'down' ? 'is-destructive' : ''}
               type="button"
               title="Downvote"
+              disabled={!canInteract}
               onClick={() =>
                 setUserVote((current) => (current === 'down' ? null : 'down'))
               }
@@ -90,6 +95,7 @@ export const DiscussionComment = ({
           <button
             className="pe-reply-button"
             type="button"
+            disabled={!canInteract}
             onClick={() => onReply(comment.id)}
           >
             <Reply size={13} />
@@ -103,6 +109,7 @@ export const DiscussionComment = ({
               <button
                 key={reason}
                 type="button"
+                disabled={!canInteract}
                 onClick={() => setShowReport(false)}
               >
                 {reason}
@@ -117,6 +124,7 @@ export const DiscussionComment = ({
           key={reply.id}
           comment={reply}
           level={level + 1}
+          canInteract={canInteract}
           onReply={onReply}
         />
       ))}

@@ -1,8 +1,13 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { getDemoComments } from './demo-comments'
 import { DiscussionPanel } from './DiscussionPanel'
 import { PageExtrasButton } from './PageExtrasButton'
 import type { PageInfo } from './types'
+import {
+  getAuthSession,
+  subscribeToAuthSession,
+  type AuthSession,
+} from '../utils/auth'
 
 type PageExtrasProps = {
   page: PageInfo
@@ -10,7 +15,13 @@ type PageExtrasProps = {
 
 export const PageExtras = ({ page }: PageExtrasProps) => {
   const [isPanelOpen, setIsPanelOpen] = useState(false)
+  const [session, setSession] = useState<AuthSession | null>(null)
   const comments = useMemo(() => getDemoComments(page), [page])
+
+  useEffect(() => {
+    getAuthSession().then(setSession)
+    return subscribeToAuthSession(setSession)
+  }, [])
 
   return (
     <div className="pe-root">
@@ -23,6 +34,7 @@ export const PageExtras = ({ page }: PageExtrasProps) => {
         isOpen={isPanelOpen}
         page={page}
         comments={comments}
+        session={session}
         onClose={() => setIsPanelOpen(false)}
       />
     </div>
