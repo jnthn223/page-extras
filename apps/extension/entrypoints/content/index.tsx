@@ -1,36 +1,13 @@
 import ReactDOM from 'react-dom/client'
-import { MessageCircle } from 'lucide-react'
+import { PageExtras } from '../../components/PageExtras'
+import type { PageInfo } from '../../components/types'
 import './style.css'
 
-const getCurrentPage = () => ({
+const getCurrentPage = (): PageInfo => ({
   title: document.title || 'Untitled page',
   domain: window.location.hostname,
   url: window.location.href,
 })
-
-const PageExtrasContent = () => {
-  const page = getCurrentPage()
-
-  return (
-    <div className="pageextras-shell">
-      <button className="pageextras-button" type="button" title="Open PageExtras">
-        <MessageCircle size={18} />
-        <span>PageExtras</span>
-      </button>
-      <aside className="pageextras-panel" aria-label="PageExtras discussion preview">
-        <div>
-          <p className="pageextras-kicker">Current page</p>
-          <h1>{page.title}</h1>
-          <p>{page.domain}</p>
-        </div>
-        <div className="pageextras-empty">
-          <strong>No extras loaded yet</strong>
-          <span>Next step: connect this shell to the discussion components.</span>
-        </div>
-      </aside>
-    </div>
-  )
-}
 
 export default defineContentScript({
   matches: ['http://*/*', 'https://*/*'],
@@ -45,7 +22,7 @@ export default defineContentScript({
         container.append(app)
 
         const root = ReactDOM.createRoot(app)
-        root.render(<PageExtrasContent />)
+        root.render(<PageExtras page={getCurrentPage()} />)
 
         return root
       },
