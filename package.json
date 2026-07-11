@@ -6,6 +6,7 @@
     "apps/*"
   ],
   "scripts": {
+    "dev": "concurrently -n web,extension -c blue,green \"npm run dev:web\" \"npm run dev:extension\"",
     "dev:web": "npm run dev --workspace apps/web",
     "build:web": "npm run build --workspace apps/web",
     "start:web": "npm run start --workspace apps/web",
@@ -13,5 +14,8 @@
     "dev:extension": "npm run dev --workspace apps/extension",
     "build:extension": "npm run build --workspace apps/extension",
     "zip:extension": "npm run zip --workspace apps/extension"
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.3"
   }
 }

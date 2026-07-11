@@ -15,7 +15,7 @@ export const PageExtrasButton = ({
     <button
       className={`pe-floating-button ${hasDiscussions ? 'pe-floating-button--active' : ''}`}
       type="button"
-      title="Open PageExtras demo discussion"
+      title="Open PageExtras discussion"
       onClick={onClick}
     >
       {count > 0 ? <MessageCircle size={18} /> : <Sparkles size={18} />}

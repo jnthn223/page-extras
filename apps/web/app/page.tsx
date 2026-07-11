@@ -1,13 +1,14 @@
 'use client'
 
 import { PageExtras } from '@/components/PageExtras'
+import { SiteShell } from '@/components/site/SiteShell'
 import type { FC } from 'react'
 
 const mockComments = [
   {
     id: '1',
-    author: 'Alex Chen',
-    avatar: 'A',
+    author: 'threadwatcher',
+    avatar: 'T',
     reputation: 1250,
     timestamp: '2 hours ago',
     content:
@@ -17,8 +18,8 @@ const mockComments = [
     replies: [
       {
         id: '1-1',
-        author: 'Jordan Lee',
-        avatar: 'J',
+        author: 'quiet_reader',
+        avatar: 'Q',
         reputation: 450,
         timestamp: '1 hour ago',
         content: 'I completely agree! The writing is clear and well-researched.',
@@ -29,8 +30,8 @@ const mockComments = [
   },
   {
     id: '2',
-    author: 'Sam Rivera',
-    avatar: 'S',
+    author: 'context_club',
+    avatar: 'C',
     reputation: 890,
     timestamp: '1 hour ago',
     content:
@@ -40,8 +41,8 @@ const mockComments = [
   },
   {
     id: '3',
-    author: 'Taylor Morgan',
-    avatar: 'T',
+    author: 'source_needed',
+    avatar: 'S',
     reputation: 320,
     timestamp: '30 minutes ago',
     content:
@@ -51,8 +52,8 @@ const mockComments = [
   },
   {
     id: '4',
-    author: 'Casey Kim',
-    avatar: 'C',
+    author: 'tab_hopper',
+    avatar: 'T',
     reputation: 156,
     timestamp: '15 minutes ago',
     content: 'Thanks for sharing. Definitely got me thinking about the implications.',
@@ -63,7 +64,7 @@ const mockComments = [
 
 const Page: FC = () => {
   return (
-    <main className="min-h-screen bg-gradient-to-br from-background via-background to-secondary">
+    <SiteShell>
       {/* Hero section */}
       <div className="max-w-4xl mx-auto px-6 py-20">
         <div className="mb-12 animate-scale-in">
@@ -187,7 +188,7 @@ const Page: FC = () => {
         pageDomain="pageextras.io"
         initialComments={mockComments}
       />
-    </main>
+    </SiteShell>
   )
 }
 

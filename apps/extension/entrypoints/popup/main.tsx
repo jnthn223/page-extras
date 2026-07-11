@@ -3,14 +3,16 @@ import { LogIn, LogOut, MessageCircle, Settings, User } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import {
   getAuthSession,
-  signInDemoUser,
-  signOutDemoUser,
+  signOutUser,
   subscribeToAuthSession,
   type AuthSession,
 } from '../../utils/auth'
 import './style.css'
 
-const WEB_APP_URL = 'http://localhost:3000'
+const WEB_APP_URL =
+  import.meta.env.WXT_PUBLIC_WEB_APP_URL?.replace(/\/$/, '') ?? 'http://localhost:3000'
+
+const EXTENSION_BUILD_LABEL = '0.1.1 auth diagnostics'
 
 const openWebPage = (path: string) => {
   browser.tabs.create({ url: `${WEB_APP_URL}${path}` })
@@ -38,12 +40,22 @@ const Popup = () => {
 
       <section>
         <span>{session ? 'Signed in' : 'Signed out'}</span>
-        <strong>{session ? session.user.displayName : 'Join PageExtras discussions'}</strong>
+        <strong>{session ? `@${session.user.username}` : 'Join PageExtras discussions'}</strong>
         <p>
           {session
             ? `${session.user.reputation.toLocaleString()} reputation`
             : 'Sign in to post, vote, reply, and report.'}
         </p>
+      </section>
+
+      <section className="diagnostics">
+        <span>Extension build</span>
+        <strong>{EXTENSION_BUILD_LABEL}</strong>
+        <p>Firebase token: {session?.idToken ? 'present' : 'missing'}</p>
+        {session?.projectId ? <p>Firebase project: {session.projectId}</p> : null}
+        {session?.syncedAt ? (
+          <p>Auth bridge sync: {new Date(session.syncedAt).toLocaleString()}</p>
+        ) : null}
       </section>
 
       {session ? (
@@ -56,23 +68,16 @@ const Popup = () => {
             <Settings size={16} />
             Settings
           </button>
-          <button type="button" className="button-secondary" onClick={signOutDemoUser}>
+          <button type="button" className="button-secondary" onClick={signOutUser}>
             <LogOut size={16} />
             Sign out
           </button>
         </div>
       ) : (
         <div className="popup-actions">
-          <button type="button" onClick={signInDemoUser}>
+          <button type="button" onClick={() => openWebPage('/login')}>
             <LogIn size={16} />
-            Demo sign in
-          </button>
-          <button
-            type="button"
-            className="button-secondary"
-            onClick={() => openWebPage('/login')}
-          >
-            Open login page
+            Sign in
           </button>
         </div>
       )}

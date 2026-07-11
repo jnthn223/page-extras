@@ -1,5 +1,6 @@
 export type PageExtraComment = {
   id: string
+  authorId?: string
   author: string
   reputation: number
   createdAt: string

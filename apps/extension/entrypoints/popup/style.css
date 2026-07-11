@@ -63,6 +63,15 @@ section strong {
   font-size: 14px;
 }
 
+.diagnostics {
+  gap: 3px;
+  background: #1f2a28;
+}
+
+.diagnostics strong {
+  color: #62cfc0;
+}
+
 button {
   display: inline-flex;
   align-items: center;

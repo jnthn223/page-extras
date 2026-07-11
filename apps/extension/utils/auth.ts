@@ -1,37 +1,36 @@
 export type AuthUser = {
   id: string
   username: string
-  displayName: string
   initials: string
   reputation: number
 }
 
 export type AuthSession = {
   user: AuthUser
+  idToken: string
+  projectId?: string
+  syncedAt?: string
 }
 
-const AUTH_STORAGE_KEY = 'pageextras.demoSession'
-
-export const demoUser: AuthUser = {
-  id: 'demo-user-alex',
-  username: 'alexchen',
-  displayName: 'Alex Chen',
-  initials: 'A',
-  reputation: 1250,
-}
+const AUTH_STORAGE_KEY = 'pageextras.authSession'
 
 export const getAuthSession = async (): Promise<AuthSession | null> => {
   const result = await browser.storage.local.get(AUTH_STORAGE_KEY)
-  return (result[AUTH_STORAGE_KEY] as AuthSession | undefined) ?? null
-}
+  const session = result[AUTH_STORAGE_KEY] as AuthSession | undefined
 
-export const signInDemoUser = async () => {
-  const session: AuthSession = { user: demoUser }
-  await browser.storage.local.set({ [AUTH_STORAGE_KEY]: session })
+  if (!session?.idToken) {
+    if (session) await browser.storage.local.remove(AUTH_STORAGE_KEY)
+    return null
+  }
+
   return session
 }
 
-export const signOutDemoUser = async () => {
+export const setAuthSession = async (session: AuthSession) => {
+  await browser.storage.local.set({ [AUTH_STORAGE_KEY]: session })
+}
+
+export const signOutUser = async () => {
   await browser.storage.local.remove(AUTH_STORAGE_KEY)
 }
 

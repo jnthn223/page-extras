@@ -77,7 +77,7 @@ export const DiscussionPanel: FC<DiscussionPanelProps> = ({
   const handleReply = (parentId: string) => {
     if (inputRef.current) {
       inputRef.current.focus()
-      setNewCommentText(`@reply-${parentId} `)
+      setNewCommentText('')
     }
   }
 
