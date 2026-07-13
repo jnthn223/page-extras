@@ -1,6 +1,6 @@
 'use client'
 
-import { API_ENDPOINTS, requestMagicLink } from '@/lib/api'
+import { requestMagicLink } from '@/lib/api'
 import { getFirebaseAuth, signInWithGoogle } from '@/lib/firebase'
 import { onAuthStateChanged } from 'firebase/auth'
 import { Mail, ShieldCheck } from 'lucide-react'
@@ -121,13 +121,6 @@ export const LoginForm = () => {
           Could not request a magic link. Make sure the backend auth endpoint is running.
         </p>
       ) : null}
-
-      <div className="mt-5 space-y-2 rounded-lg border border-border bg-secondary/40 p-3 text-xs text-muted-foreground">
-        <div>
-          Magic link endpoint:{' '}
-          <span className="break-all text-foreground">{API_ENDPOINTS.magicLink}</span>
-        </div>
-      </div>
     </div>
   )
 }

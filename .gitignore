@@ -33,4 +33,6 @@ Thumbs.db
 
 # Deployment and local tooling
 .vercel/
+.firebase/
+firebase-debug.log*
 coverage/

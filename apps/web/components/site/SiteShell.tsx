@@ -69,6 +69,19 @@ export const SiteShell = ({ children }: SiteShellProps) => {
         </nav>
       </header>
       {children}
+      <footer className="border-t border-border bg-card/70">
+        <div className="mx-auto flex max-w-5xl flex-col gap-3 px-6 py-6 text-sm text-muted-foreground md:flex-row md:items-center md:justify-between">
+          <p>© 2026 PageExtras. Built for better web discussions.</p>
+          <div className="flex gap-4">
+            <Link className="transition-colors hover:text-foreground" href="/privacy">
+              Privacy
+            </Link>
+            <Link className="transition-colors hover:text-foreground" href="/terms">
+              Terms
+            </Link>
+          </div>
+        </div>
+      </footer>
     </main>
   )
 }

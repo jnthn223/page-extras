@@ -23,6 +23,12 @@ Build:
 npm run build:web
 ```
 
+Deploy to Firebase Hosting:
+
+```sh
+firebase deploy --only hosting
+```
+
 ## Extension Environment
 
 Set these before building the production extension:
