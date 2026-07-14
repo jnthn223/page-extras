@@ -10,7 +10,7 @@ The client repo has two deployable pieces:
 Set these in the web hosting platform:
 
 ```sh
-NEXT_PUBLIC_API_BASE_URL=https://api.your-domain.com
+NEXT_PUBLIC_API_BASE_URL=https://api.pageextras.com
 NEXT_PUBLIC_FIREBASE_API_KEY=<firebase-web-api-key>
 NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=pageextras-43525.firebaseapp.com
 NEXT_PUBLIC_FIREBASE_PROJECT_ID=pageextras-43525
@@ -34,8 +34,8 @@ firebase deploy --only hosting
 Set these before building the production extension:
 
 ```sh
-WXT_PUBLIC_API_BASE_URL=https://api.your-domain.com
-WXT_PUBLIC_WEB_APP_URL=https://your-web-domain.com
+WXT_PUBLIC_API_BASE_URL=https://api.pageextras.com
+WXT_PUBLIC_WEB_APP_URL=https://pageextras.com
 ```
 
 Build:
